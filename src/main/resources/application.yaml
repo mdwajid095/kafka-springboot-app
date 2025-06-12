@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: admin
+  application:
+    name: kafka-${spring.profiles.active}
+  kafka:
+    bootstrap-servers: kafka.ict.emp.gcp.de.pri.o2.com:9092
+    topic: wow-topic
+    security:
+      protocol: SSL
+    ssl:
+      trust-store-location: file:./src/main/resources/certs/kafka-external-truststore.p12
+      trust-store-password: mystorepassword
+      key-store-location: file:./src/main/resources/certs/kafka-external-keystore.p12
+      key-store-password: mystorepassword
+      key-password: mystorepassword
+
+    consumer:
+      group-id: wow-cg
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 3
+      ack-mode: batch
+      retry:
+        max-attempts: 3
+        initial-interval: 1000
+        multiplier: 2.0
+        max-interval: 10000
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      retries: 3
+      enable-idempotence: true
+      properties:
+        linger.ms: 1
+        batch.size: 16384
+        buffer.memory: 33554432
+
+    admin:
+      topic-name: wow-topic
+      partitions: 3
+      replication-factor: 1
