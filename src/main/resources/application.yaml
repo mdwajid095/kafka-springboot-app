@@ -48,3 +48,25 @@ spring:
       topic-name: wow-topic
       partitions: 3
       replication-factor: 1
+
+    streams:
+      application-id: wow-stream-cg
+      bootstrap-servers: kafka.ict.emp.gcp.de.pri.o2.com:9092
+      input-topic: wow-topic-in
+      output-topic: wow-topic-out
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      # Recommended additional configs for production
+      state-dir: ./kafka-streams-state
+      replication-factor: 1
+      num-stream-threads: 3
+      commit-interval-ms: 1000
+      cache-max-bytes-buffering: 1024   # 10 MB
+      processing-guarantee: exactly_once_v2 # or at_least_once
+      topology.optimization: all
+      # For error handling and monitoring
+      default-deserialization-exception-handler: org.apache.kafka.streams.errors.LogAndContinueExceptionHandler
+      default-production-exception-handler: org.apache.kafka.streams.errors.DefaultProductionExceptionHandler
+      # Optional: metrics reporter
+      # metric.reporters: io.confluent.metrics.reporter.ConfluentMetricsReporter
