@@ -18,7 +18,7 @@ A modular, profile-driven Spring Boot project for building Kafka admin, producer
 - **Java:** 17+ (recommended)
 - **Spring Boot:** 3.x
 - **Spring Kafka:** 3.x
-- **Apache Kafka Client:** 3.8.1 (override in `pom.xml` if needed)
+- **Apache Kafka Client:** 3.9.1 (override in `pom.xml` if needed)
 - **Maven:** 3.8+ (or use included `mvnw` wrapper)
 
 ---
