@@ -110,7 +110,7 @@ taskkill /PID <PID> /F
 <dependency>
     <groupId>org.apache.kafka</groupId>
     <artifactId>kafka-clients</artifactId>
-    <version>3.8.1</version> <!-- or your desired version -->
+    <version>3.9.1</version> <!-- or your desired version -->
 </dependency>
 ```
 
