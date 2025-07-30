@@ -1,6 +1,14 @@
 server:
   port: 8080
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+# --------------------------------------------------------------
 spring:
   profiles:
     active: admin
@@ -17,7 +25,7 @@ spring:
       key-store-location: file:./src/main/resources/certs/kafka-external-keystore.p12
       key-store-password: mystorepassword
       key-password: mystorepassword
-
+# ----------------------------CONSUMER--------------------------
     consumer:
       group-id: wow-cg
       auto-offset-reset: earliest
@@ -32,7 +40,7 @@ spring:
         initial-interval: 1000
         multiplier: 2.0
         max-interval: 10000
-
+# ----------------------------PRODUCER--------------------------
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -43,12 +51,12 @@ spring:
         linger.ms: 1
         batch.size: 16384
         buffer.memory: 33554432
-
+# -----------------------------ADMIN----------------------------
     admin:
       topic-name: wow-topic
       partitions: 3
       replication-factor: 1
-
+# ----------------------------STREAMS---------------------------
     streams:
       application-id: wow-stream-cg
       bootstrap-servers: kafka.ict.emp.gcp.de.pri.o2.com:9092
