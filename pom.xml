@@ -12,17 +12,19 @@
 	<groupId>com.kafka</groupId>
 	<artifactId>kafka-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kafka</name>
+	<name>kafka-springboot-app</name>
 	<description>Demo project for Spring Boot kafka-app</description>
-	<url />
+	<url>https://github.com/mdwajid095/kafka-springboot-app</url>
 	<licenses>
 		<license />
 	</licenses>
 	<developers>
-		<developer />
+		<developer>
+			<name>Wajid</name>
+			<email>mdwajid095@gmail.com</email>
+		</developer>
 	</developers>
 	<scm>
-		<connection />
 		<developerConnection />
 		<tag />
 		<url />
@@ -42,7 +44,7 @@
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka-clients</artifactId>
-			<version>3.8.1</version><!--$NO-MVN-MAN-VER$--> <!-- overriding kafka-client version -->
+			<version>3.9.1</version><!--$NO-MVN-MAN-VER$--> <!-- overriding kafka-client version -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
@@ -58,6 +60,10 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
 
