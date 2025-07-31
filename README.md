@@ -1,6 +1,6 @@
 # Kafka Microservices with Spring Boot
 
-A modular, profile-driven Spring Boot project for building Kafka admin, producer, and consumer microservices with clean separation and easy configuration.
+A modular, profile-driven Spring Boot project for building Kafka admin, producer, consumer and stream microservices with clean separation and easy configuration.
 
 ---
 
