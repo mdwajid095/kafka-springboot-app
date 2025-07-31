@@ -41,22 +41,28 @@ As in [Service Overview](#service-overview) we can see, we have several services
   *Purpose:* The main Spring Boot application entry point.
 
 
-- **admin**  
+- **Admin**  
   *Purpose:* Provides endpoints and logic for Kafka admin tasks such as creating topics dynamically.  
   *Profile:* `admin`  
   *Usage:* Use this service to manage Kafka topics at runtime via REST endpoints.
 
 
-- **consumer**  
+- **Consumer**  
   *Purpose:* Listens to Kafka topics and processes consumed messages.  
   *Profile:* `consumer`  
   *Usage:* Processes messages from Kafka topics as they arrive.
 
 
-- **producer**  
+- **Producer**  
   *Purpose:* Handles publishing messages/events to Kafka topics.  
   *Profile:* `producer`  
   *Usage:* Exposes REST endpoints for sending events to Kafka.
+
+
+- **Streams**  
+  *Purpose:* Handles streaming messages/events from/to Kafka topics.  
+  *Profile:* `stream`  
+  *Usage:* Streams messages from Kafka topics as they arrive and send to terger topic.
 
 ---
 
@@ -80,11 +86,12 @@ kafka/
 │   │   │           │   │   └── KafkaProducerController.java
 │   │   │           │   └── service/
 │   │   │           │       └── KafkaProducerService.java
-│   │   │           └── consumer/
-│   │   │               ├── controller/
-│   │   │               │   └── KafkaConsumerController.java
-│   │   │               └── service/
-│   │   │                   └── KafkaConsumerService.java
+│   │   │           ├── consumer/
+│   │   │           │   ├── controller/
+│   │   │           │   │   └── KafkaConsumerController.java
+│   │   │           │   └── service/
+│   │   │           │       └── KafkaConsumerService.java
+│   │   │           └── .. (other services)
 │   │   └── resources/
 │   │       ├── application.yaml
 │   │       └── certs/
@@ -92,7 +99,7 @@ kafka/
 │       └── java/
 │           └── com/
 │               └── kafka/
-│                   └── ... (test classes)
+│                   └── .. (test classes)
 ├── pom.xml
 └── README.md
 ```
