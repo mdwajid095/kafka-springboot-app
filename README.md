@@ -108,10 +108,25 @@ kafka/
 
 ## Common Commands
 
+### List all running Java processes (to find PID)
+```sh
+jps -l
+```
+
 ### Kill used port (Windows)
 ```sh
 netstat -aon | findstr :8080
 taskkill /PID <PID> /F
+```
+
+### Clean and remove target directory
+```sh
+./mvnw clean
+```
+
+### Maven install dependencies
+```sh
+./mvnw install
 ```
 
 ### Maven build
@@ -148,16 +163,6 @@ java "-Dhttp.proxyHost=10.169.127.8" "-Dhttp.proxyPort=8080" "-Dhttps.proxyHost=
 ### Run tests
 ```sh
 ./mvnw test
-```
-
-### Clean and remove target directory
-```sh
-./mvnw clean
-```
-
-### List all running Java processes (to find PID)
-```sh
-jps -l
 ```
 
 ---
