@@ -6,10 +6,22 @@ A modular, profile-driven Spring Boot project for building Kafka admin, producer
 
 ## Table of Contents
 
+* [How to use](#how-to-use)
 * [Version Details](#version-details)
 * [Service Overview](#service-overview)
 * [Project Structure](#project-structure)
 * [Common Commands](#common-commands)
+
+---
+
+## How to use
+
+As in [Service Overview](#service-overview) we can see, we have several services inside this `kafka-springboot-app` application. So, to invoke the particular service, we have to pass the profiles in `application.yaml` file. Like, to invoke consumer service, we have to set profiles as `consumer`.
+
+- Admin service profiles is `admin`
+- Consumer service profiles is `consumer`
+- Producer service profiles is `producer`
+- Streams service profiles is `stream`
 
 ---
 
