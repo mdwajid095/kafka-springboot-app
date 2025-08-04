@@ -1,15 +1,27 @@
 # Kafka Microservices with Spring Boot
 
-A modular, profile-driven Spring Boot project for building Kafka admin, producer, and consumer microservices with clean separation and easy configuration.
+A modular, profile-driven Spring Boot project for building Kafka admin, producer, consumer and stream microservices with clean separation and easy configuration.
 
 ---
 
 ## Table of Contents
 
+* [How to use](#how-to-use)
 * [Version Details](#version-details)
 * [Service Overview](#service-overview)
 * [Project Structure](#project-structure)
 * [Common Commands](#common-commands)
+
+---
+
+## How to use
+
+As in [Service Overview](#service-overview) we can see, we have several services inside this `kafka-springboot-app` application. So, to invoke the particular service, we have to pass the profiles in `application.yaml` file. Like, to invoke consumer service, we have to set profiles as `consumer`.
+
+- Admin service profiles is `admin`
+- Consumer service profiles is `consumer`
+- Producer service profiles is `producer`
+- Streams service profiles is `stream`
 
 ---
 
@@ -29,22 +41,28 @@ A modular, profile-driven Spring Boot project for building Kafka admin, producer
   *Purpose:* The main Spring Boot application entry point.
 
 
-- **admin**  
+- **Admin**  
   *Purpose:* Provides endpoints and logic for Kafka admin tasks such as creating topics dynamically.  
   *Profile:* `admin`  
   *Usage:* Use this service to manage Kafka topics at runtime via REST endpoints.
 
 
-- **consumer**  
+- **Consumer**  
   *Purpose:* Listens to Kafka topics and processes consumed messages.  
   *Profile:* `consumer`  
   *Usage:* Processes messages from Kafka topics as they arrive.
 
 
-- **producer**  
+- **Producer**  
   *Purpose:* Handles publishing messages/events to Kafka topics.  
   *Profile:* `producer`  
   *Usage:* Exposes REST endpoints for sending events to Kafka.
+
+
+- **Streams**  
+  *Purpose:* Handles streaming messages/events from/to Kafka topics.  
+  *Profile:* `stream`  
+  *Usage:* Streams messages from Kafka topics as they arrive and send to terger topic.
 
 ---
 
@@ -68,11 +86,12 @@ kafka/
 │   │   │           │   │   └── KafkaProducerController.java
 │   │   │           │   └── service/
 │   │   │           │       └── KafkaProducerService.java
-│   │   │           └── consumer/
-│   │   │               ├── controller/
-│   │   │               │   └── KafkaConsumerController.java
-│   │   │               └── service/
-│   │   │                   └── KafkaConsumerService.java
+│   │   │           ├── consumer/
+│   │   │           │   ├── controller/
+│   │   │           │   │   └── KafkaConsumerController.java
+│   │   │           │   └── service/
+│   │   │           │       └── KafkaConsumerService.java
+│   │   │           └── .. (other services)
 │   │   └── resources/
 │   │       ├── application.yaml
 │   │       └── certs/
@@ -80,7 +99,7 @@ kafka/
 │       └── java/
 │           └── com/
 │               └── kafka/
-│                   └── ... (test classes)
+│                   └── .. (test classes)
 ├── pom.xml
 └── README.md
 ```
@@ -89,10 +108,25 @@ kafka/
 
 ## Common Commands
 
+### List all running Java processes (to find PID)
+```sh
+jps -l
+```
+
 ### Kill used port (Windows)
 ```sh
 netstat -aon | findstr :8080
 taskkill /PID <PID> /F
+```
+
+### Clean and remove target directory
+```sh
+./mvnw clean
+```
+
+### Maven install dependencies
+```sh
+./mvnw install
 ```
 
 ### Maven build
@@ -129,16 +163,6 @@ java "-Dhttp.proxyHost=10.169.127.8" "-Dhttp.proxyPort=8080" "-Dhttps.proxyHost=
 ### Run tests
 ```sh
 ./mvnw test
-```
-
-### Clean and remove target directory
-```sh
-./mvnw clean
-```
-
-### List all running Java processes (to find PID)
-```sh
-jps -l
 ```
 
 ---
