@@ -16,7 +16,7 @@ spring:
     name: kafka-${spring.profiles.active}
   kafka:
     bootstrap-servers: kafka.ict.emp.gcp.de.pri.o2.com:9092
-    topic: tef.de.cim.OrderStateChangeEvent-B2B-v1
+    topic: wow-topic
     security:
       protocol: SSL
     ssl:
