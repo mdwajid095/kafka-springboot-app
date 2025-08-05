@@ -11,18 +11,18 @@ management:
 # --------------------------------------------------------------
 spring:
   profiles:
-    active: admin
+    active: consumer
   application:
     name: kafka-${spring.profiles.active}
   kafka:
     bootstrap-servers: kafka.ict.emp.gcp.de.pri.o2.com:9092
-    topic: wow-topic
+    topic: tef.de.cim.OrderStateChangeEvent-B2B-v1
     security:
       protocol: SSL
     ssl:
-      trust-store-location: file:./src/main/resources/certs/kafka-external-truststore.p12
+      trust-store-location: file:./src/main/resources/certs/ict-truststore.p12
       trust-store-password: mystorepassword
-      key-store-location: file:./src/main/resources/certs/kafka-external-keystore.p12
+      key-store-location: file:./src/main/resources/certs/ict-keystore.p12
       key-store-password: mystorepassword
       key-password: mystorepassword
 # ----------------------------CONSUMER--------------------------
@@ -30,8 +30,18 @@ spring:
       group-id: wow-cg
       auto-offset-reset: earliest
       enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    properties:
+      spring.deserializer.key.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      schema.registry.url: https://schemaregistry.ict.emp.gcp.de.pri.o2.com:443
+      schema.registry.ssl.truststore.location: ./src/main/resources/certs/ict-truststore.p12
+      schema.registry.ssl.truststore.password: mystorepassword
+      schema.registry.ssl.truststore.type: PKCS12
+      specific.avro.reader: false
     listener:
       concurrency: 3
       ack-mode: batch
