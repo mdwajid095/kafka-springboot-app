@@ -11,7 +11,7 @@ management:
 # --------------------------------------------------------------
 spring:
   profiles:
-    active: consumer
+    active: admin
   application:
     name: kafka-${spring.profiles.active}
   kafka:
