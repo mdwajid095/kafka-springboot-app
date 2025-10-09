@@ -52,6 +52,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>7.5.0</version> <!-- Match this with your Confluent Platform version -->
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -66,6 +72,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<url>http://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
