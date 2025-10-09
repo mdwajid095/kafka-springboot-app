@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import com.kafka.avro.EmployeeDetails;
+
 @Profile("consumer")
 @Service
 class KafkaConsumerService {
@@ -14,16 +16,19 @@ class KafkaConsumerService {
     private static final Logger logger = LoggerFactory.getLogger(KafkaConsumerService.class);
 
     @KafkaListener(
-        topics = "${spring.kafka.topic}",
-        groupId = "${spring.kafka.consumer.group-id}"
+    topics = "${spring.kafka.topic}",
+    groupId = "${spring.kafka.consumer.group-id}"
     )
-    void listen(ConsumerRecord<?, ?> record) {
+    void listen(ConsumerRecord<?, EmployeeDetails> record) {
+        // Use GenericRecord (ConsumerRecord<?, GenericRecord>) if schema have namespace defined.
+        EmployeeDetails event = record.value();
         logger.info(
-            "Received event from topic: {}-{}, offset: {}, value: {}",
+            "Received Avro event: topic={}, partition={}, offset={}, key={}, value={}",
             record.topic(),
             record.partition(),
             record.offset(),
-            record.value()
+            record.key(),
+            event
         );
         // processing logic here
     }

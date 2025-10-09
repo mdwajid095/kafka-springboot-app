@@ -1,5 +1,6 @@
 server:
   port: 8080
+# http://localhost:8080/actuator
 management:
   endpoints:
     web:
@@ -11,7 +12,7 @@ management:
 # --------------------------------------------------------------
 spring:
   profiles:
-    active: admin
+    active: producer
   application:
     name: kafka-${spring.profiles.active}
   kafka:
@@ -30,8 +31,6 @@ spring:
       group-id: wow-cg
       auto-offset-reset: earliest
       enable-auto-commit: false
-      # key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      # value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     properties:
@@ -41,7 +40,7 @@ spring:
       schema.registry.ssl.truststore.location: ./src/main/resources/certs/ict-truststore.p12
       schema.registry.ssl.truststore.password: mystorepassword
       schema.registry.ssl.truststore.type: PKCS12
-      specific.avro.reader: false
+      specific.avro.reader: true
     listener:
       concurrency: 3
       ack-mode: batch
@@ -52,12 +51,16 @@ spring:
         max-interval: 10000
 # ----------------------------PRODUCER--------------------------
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       acks: 1
       retries: 3
       enable-idempotence: true
       properties:
+        schema.registry.url: https://schemaregistry.ict.emp.gcp.de.pri.o2.com:443
+        schema.registry.ssl.truststore.location: ./src/main/resources/certs/ict-truststore.p12
+        schema.registry.ssl.truststore.password: mystorepassword
+        schema.registry.ssl.truststore.type: PKCS12
         linger.ms: 1
         batch.size: 16384
         buffer.memory: 33554432

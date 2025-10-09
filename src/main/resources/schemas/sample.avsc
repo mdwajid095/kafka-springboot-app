@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "EmployeeDetails",
+  "namespace": "com.kafka.avro",
+  "fields": [
+    { "name": "name", "type": "string" },
+    { "name": "empid", "type": "string" },
+    {
+      "name": "address",
+      "type": {
+        "type": "record",
+        "name": "Address",
+        "fields": [
+          { "name": "number", "type": "int" },
+          { "name": "city", "type": "string" },
+          { "name": "country", "type": "string" }
+        ]
+      }
+    },
+    { "name": "salary", "type": "double" }
+  ]
+}

@@ -1,7 +1,7 @@
 package com.kafka.producer.controller;
 
+import com.kafka.avro.EmployeeDetails;
 import com.kafka.producer.service.KafkaProducerService;
-
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +25,13 @@ class KafkaProducerController {
 
     // Endpoint to publish event - curl -X POST http://localhost:8080/kafka/v1/send -H "Content-Type: application/json" -d {"ordertime":1000004222380,"orderid":23,"itemid":"Item_101","address":{"city":"Kolkata","state":"WB","zipcode":700046}}
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody String message) {
-        if (message == null || message.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("Message must not be empty.");
+    public ResponseEntity<String> sendMessage(@RequestBody EmployeeDetails event) {
+        if (event == null) {
+            return ResponseEntity.badRequest().body("Event must not be empty.");
         }
         try {
-            KafkaProducerService.send(message);
-            return ResponseEntity.ok("Message sent to Kafka topic.");
+            KafkaProducerService.send(event);
+            return ResponseEntity.ok("Event sent to Kafka topic.");
         } catch (Exception ex) {
             return ResponseEntity.internalServerError().body("Failed to send message: " + ex.getMessage());
         }

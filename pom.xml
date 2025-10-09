@@ -86,6 +86,23 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.11.3</version>
+				<executions>
+					<execution>
+					<phase>generate-sources</phase>
+					<goals>
+						<goal>schema</goal>
+					</goals>
+					<configuration>
+						<sourceDirectory>${project.basedir}/src/main/resources/schemas</sourceDirectory>
+						<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+					</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
